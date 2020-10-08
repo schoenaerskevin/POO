@@ -1,10 +1,18 @@
 const express = require('express')
-
+const morgan = require('morgan')
 const server = express()
+const mongoose = require('mongoose');
+const dbURI = " mongodb+srv://root:root@cluster0.h4adj.mongodb.net/email?retryWrites=true&w=majority;"
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+
+.then((result) => server.listen(4700))
+    .catch((err) => console.log(err))
     //register view engines
+    //middleware
 server.set('view engine', 'ejs');
 server.use(express.static('public'));
-server.listen('4700')
+server.use(morgan('dev'));
+
 
 
 //link to pages
@@ -23,6 +31,6 @@ server.get('/shop', (req, res) => {
 server.get('/gallery', (req, res) => {
     res.render('gallery');
 });
-server.get('/contact-us', (req, res) => {
-    res.render('contact-us');
+server.get('/bdrer', (req, res) => {
+    res.render('bdrer');
 });
